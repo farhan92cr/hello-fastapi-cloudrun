@@ -23,7 +23,7 @@ This project demonstrates a complete CI/CD pipeline for a FastAPI web API using:
 ### 1. Clone the Repository
 
 
-git clone https://github.com/your-username/hello-fastapi-cloudrun.git
+git clone https://github.com/farhan92cr/hello-fastapi-cloudrun.git
 cd hello-fastapi-cloudrun
 
 
