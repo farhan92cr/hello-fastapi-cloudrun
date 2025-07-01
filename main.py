@@ -3,7 +3,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"status": "Demo" }
+    return {"status": "retuen DEMO" }
 
 @app.get("/health")
 def health_check():
