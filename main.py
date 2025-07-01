@@ -3,7 +3,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"status": "ok", " vulnerability scanning with Trivy added" : " " }
+    return {"status": "ok", " vulnerability scanning with Trivy added" : " sahla" }
 
 @app.get("/health")
 def health_check():
