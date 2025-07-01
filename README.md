@@ -1,64 +1,90 @@
-# 🚀 Hello FastAPI CI/CD on Google Cloud
+ **🚀 Hello FastAPI CI/CD on Google Cloud**
 
 This project demonstrates a complete CI/CD pipeline for a FastAPI web API using:
 
-- Google Cloud Run (serverless deployment)
-- Artifact Registry (Docker image storage)
-- GitHub Actions (CI/CD automation)
+- **Google Cloud Run** (serverless deployment)
+- **Artifact Registry** (Docker image storage)
+- **GitHub Actions** (CI/CD automation)
+- **Trivy** (security scanning)
 
----
 
-## 📦 What’s Included
+
+ 📦 What’s Included
 
 - ✅ FastAPI-based JSON API: `{ "status": "ok" }`
-- ✅ Dockerized with a multi-stage, secure image
-- ✅ Artifact Registry publishing
-- ✅ Cloud Run deployment (public URL)
-- ✅ CI/CD pipeline with GitHub Actions
-- ✅ GCP IAM & security best practices
+- ✅ Dockerized using a multi-stage, non-root image
+- ✅ Trivy scan for vulnerabilities during CI
+- ✅ Docker image published to Artifact Registry
+- ✅ Deployed to Cloud Run (fully managed)
+- ✅ CI/CD automated via GitHub Actions
+- ✅ IAM roles follow least-privilege principle
 
 
-## 🛠️ Setup Instructions
+🛠️ Setup Instructions
 
-### 1. Clone the Repository
-
+1. Clone the Repository
 
 git clone https://github.com/farhan92cr/hello-fastapi-cloudrun.git
 cd hello-fastapi-cloudrun
 
 
-Enable GCP Services (one-time)
+
+2. Enable Required GCP Services (one-time) 
 gcloud services enable run.googleapis.com artifactregistry.googleapis.com
 
 
-Build & Push Manually 
+3. Manual Build & Push (Optional)
+docker build -t hello-api .
+docker tag hello-api us-central1-docker.pkg.dev/<YOUR_PROJECT_ID>/hello-api/hello-api:latest
+docker push us-central1-docker.pkg.dev/<YOUR_PROJECT_ID>/hello-api/hello-api:latest
 
 
 🔄 GitHub Actions CI/CD
-CI/CD triggers on each push to main.
-It will:
-Authenticate to GCP using GCP_SA_KEY secret
-Build and push Docker image to Artifact Registry
-Deploy new revision to Cloud Run
+CI/CD is triggered on each push to the main branch.
+
+Steps:
+
+✅ Authenticate to GCP using GCP_SA_KEY GitHub secret
+
+🐳 Build and tag Docker image
+
+🛡️ Run Trivy vulnerability scan
+
+📤 Push image to Artifact Registry
+
+🚀 Deploy latest revision to Cloud Run
+
 
 
 🔐 IAM Roles Used
+The service account has the following least-privilege IAM roles:
+
 Cloud Run Admin
 Artifact Registry Writer
 Service Account User
 
 
-💰 Cost Estimate
-Resource	Cost (Free Tier)
-Cloud Run	Free up to 2M requests/month
-Artifact Registry	Free for first 0.5 GB/month
-GitHub Actions	Free (2000 minutes/month)
-GCP credits	$300 free for 90 days
 
-✅ This project stays well within the free tier
+🔎 Security: Trivy Vulnerability Scanning
+This pipeline includes a Trivy security scan step before pushing the image.
+It scans for:
 
+OS-level vulnerabilities (CVEs)
+Python package vulnerabilities
+Only HIGH and CRITICAL issues are reported
+📄 Output is shown in the GitHub Actions logs.
+
+
+📊 Cost Estimate (Free Tier)
+Resource	Free Tier Limit
+Cloud Run	2 million requests/month
+Artifact Registry	First 0.5 GB storage/month
+GitHub Actions	2,000 minutes/month
+GCP Credits	$300 free for 90 days (new users)
+✅ This project stays fully within the free tier
 
 
 🔗 Live Demo
 Public URL: https://hello-api-17486051359.us-central1.run.app/
 Swagger Docs: https://hello-api-17486051359.us-central1.run.app/docs
+
