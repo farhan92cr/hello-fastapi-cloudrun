@@ -21,7 +21,7 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     logger.info("📥 GET request received on '/' endpoint")
-    return {"status": "ok"}
+    return {"status": "WEll come to Video DEMO "}
 
 @app.get("/health")
 def health_check():
